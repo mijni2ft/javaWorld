@@ -3,26 +3,43 @@ package codeup;
 import java.util.Scanner;
 public class CodeUp_007 {
 	
-	// 1092
+	// 1093
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
-		String str = scan.nextLine();
-		String[] arr = str.split(" ");
+		int n = scan.nextInt();
 		
-		int a = Integer.valueOf(arr[0]);  
-		int b = Integer.valueOf(arr[1]);  
-		int c = Integer.valueOf(arr[2]);
+		int[] arr = new int[23];
 		
-		int i=1;
-		
-		while(true) {
-			if (i%a ==0 && i%b==0 && i%c==0) {
-				break;
-			}
-			i++;
+		for (int i=0; i<n; i++) {
+			int j = scan.nextInt();
+			arr[j-1] += 1;
 		}
-		System.out.print(i);
+		
+		for (int j=0; j<23; j++) {
+			System.out.print(arr[j] + " ");
+		}
 	}
+	
+//	// 1092
+//	public static void main(String[] args) {
+//		Scanner scan = new Scanner(System.in);
+//		String str = scan.nextLine();
+//		String[] arr = str.split(" ");
+//		
+//		int a = Integer.valueOf(arr[0]);  
+//		int b = Integer.valueOf(arr[1]);  
+//		int c = Integer.valueOf(arr[2]);
+//		
+//		int i=1;
+//		
+//		while(true) {
+//			if (i%a ==0 && i%b==0 && i%c==0) {
+//				break;
+//			}
+//			i++;
+//		}
+//		System.out.print(i);
+//	}
 	
 //	// 1091
 //	public static void main(String[] args) {
@@ -119,6 +136,32 @@ public class CodeUp_007 {
 //			}
 //			
 //			System.out.print(" ");
+//		}
+//	}
+	
+//	// 1082
+//	public static void main(String[] args) {
+//		Scanner scan = new Scanner(System.in);
+//		int a = scan.nextInt(16);
+//		
+//		for (int i=1; i<16; i++) {
+//			System.out.printf("%X*%X=%X\n", a, i, a*i);
+//		}
+//	}
+	
+//	// 1081
+//	public static void main(String[] args) {
+//		Scanner scan = new Scanner(System.in);
+//		String str = scan.nextLine();
+//		String[] arr = str.split(" ");
+//		
+//		int n = Integer.valueOf(arr[0]);  
+//		int m = Integer.valueOf(arr[1]);
+//		
+//		for (int i=1; i<=n; i++) {
+//			for (int j=1; j<=m; j++) {
+//				System.out.println(i + " " + j);				
+//			}
 //		}
 //	}
 	
