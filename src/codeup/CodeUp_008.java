@@ -4,39 +4,35 @@ import java.util.ArrayList;
 import java.util.Scanner;
 public class CodeUp_008{
 	
-	// 1097
-	public static void main(String[] args) {
-
-	}
 	
-//	// 1096
-//	public static void main(String[] args) {
-//		Scanner scan = new Scanner(System.in);
-//		int n = scan.nextInt(); // 흰돌의 갯수
-//		
-//		int[][] arr = new int[19][19]; // 바둑판
-//		
-//		for (int i=0; i<n; i++) {
-//			// 이게 왜 안되는거야?
-////			String[] sArr = scan.nextLine().split(" ");
-////			int x_num = Integer.valueOf(sArr[0]);
-////			int y_num = Integer.valueOf(sArr[1]);
-//			
-//			int x_num = scan.nextInt();
-//			int y_num = scan.nextInt();
-//			
-//			arr[x_num-1][y_num-1] = 1;
-//		}
-//		
-//		for (int x=0; x<19; x++) {
-//			for (int y=0; y<19; y++) {
-//				System.out.print(arr[x][y]);
-//				System.out.print(" ");
-//			}
-//			System.out.print("\n");
-//		}
-//		
-//	}
+	// 1096
+	public static void main(String[] args) {
+		Scanner scan = new Scanner(System.in);
+		int n = scan.nextInt(); // 흰돌의 갯수
+		
+		int[][] arr = new int[19][19]; // 바둑판
+		
+		for (int i=0; i<n; i++) {
+			// 이게 왜 안되는거야?
+//			String[] sArr = scan.nextLine().split(" ");
+//			int x_num = Integer.valueOf(sArr[0]);
+//			int y_num = Integer.valueOf(sArr[1]);
+			
+			int x_num = scan.nextInt();
+			int y_num = scan.nextInt();
+			
+			arr[x_num-1][y_num-1] = 1;
+		}
+		
+		for (int x=0; x<19; x++) {
+			for (int y=0; y<19; y++) {
+				System.out.print(arr[x][y]);
+				System.out.print(" ");
+			}
+			System.out.print("\n");
+		}
+		
+	}
 	
 //	// 1095
 //	public static void main(String[] args) {
