@@ -5,46 +5,75 @@ import java.util.Comparator;
 import java.util.Scanner;
 public class baekjoon_001 {
 	
-	// 1931 회의실 배정 / 1208ms / 정답
+	// 11047 동전
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
 		int n = scan.nextInt();
+		int k = scan.nextInt(); // 목표 금액
 		
-		int[][] arr = new int[n][2];
+		int[] arr = new int[n];
 		
 		for (int i=0; i<n; i++) {
-			arr[i][0] = scan.nextInt(); // 시작시간
-			arr[i][1] = scan.nextInt(); // 끝나는시간
+			arr[i] = scan.nextInt(); // 동전 단위
 		}
 		
-		// 제일 일찍 끝나는 수업을 고른다.
-		// 그 끝난시간에서 가장 가까운 시작 수업을 고른다.
-		// 반복한다.
-		// 단, 끝나는 시간이 같은 경우, 시작시간이 먼저인 것을 우선으로 둔다.
-		
-		Arrays.sort(arr, new Comparator<int[]>() {
-			@Override
-			public int compare(int[] a, int[] b) {
-				
-				if(a[1] == b[1]) { // 만약 끝나는 시간이 같다면
-					return a[0]-b[0]; // 시작시간이 빠른 순으로 정렬
-				}
-				
-				return a[1]-b[1]; // 끝나는시간이 빠른 순으로 정렬
-			}
-		});
+		// 최소 동전 갯수를 구해라
+		// 큰 금액부터 쪼로록 하면되지
 		
 		int cnt = 0;
-		int now_time = 0;
-		for (int i=0; i<n; i++) {
-			if (now_time <= arr[i][0]) {
-				now_time = arr[i][1];
-				cnt++;
+		
+		for (int i=n-1; i>=0; i--) { // 주의! 뒤에부터!
+			int s = k/arr[i]; // 몫
+			
+			if (s > 0) { // 오 나누어졌다면!
+				cnt += s; // 동전 갯수를 올리고
+				k -= arr[i]*s; // 남은 금액을 차감
 			}
 		}
 		
 		System.out.println(cnt);
 	}
+	
+//	// 1931 회의실 배정 / 1208ms / 정답
+//	public static void main(String[] args) {
+//		Scanner scan = new Scanner(System.in);
+//		int n = scan.nextInt();
+//		
+//		int[][] arr = new int[n][2];
+//		
+//		for (int i=0; i<n; i++) {
+//			arr[i][0] = scan.nextInt(); // 시작시간
+//			arr[i][1] = scan.nextInt(); // 끝나는시간
+//		}
+//		
+//		// 제일 일찍 끝나는 수업을 고른다.
+//		// 그 끝난시간에서 가장 가까운 시작 수업을 고른다.
+//		// 반복한다.
+//		// 단, 끝나는 시간이 같은 경우, 시작시간이 먼저인 것을 우선으로 둔다.
+//		
+//		Arrays.sort(arr, new Comparator<int[]>() {
+//			@Override
+//			public int compare(int[] a, int[] b) {
+//				
+//				if(a[1] == b[1]) { // 만약 끝나는 시간이 같다면
+//					return a[0]-b[0]; // 시작시간이 빠른 순으로 정렬
+//				}
+//				
+//				return a[1]-b[1]; // 끝나는시간이 빠른 순으로 정렬
+//			}
+//		});
+//		
+//		int cnt = 0;
+//		int now_time = 0;
+//		for (int i=0; i<n; i++) {
+//			if (now_time <= arr[i][0]) {
+//				now_time = arr[i][1];
+//				cnt++;
+//			}
+//		}
+//		
+//		System.out.println(cnt);
+//	}
 		
 //		// 1931 회의실 배정 / 첫번째 도전
 //		public static void main(String[] args) {
