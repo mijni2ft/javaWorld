@@ -5,6 +5,42 @@ import java.util.Comparator;
 import java.util.Scanner;
 public class baekjoon_001 {
 	
+	// 1541 잃어버린 괄호
+	public static void main(String[] args) {
+		Scanner scan = new Scanner(System.in);
+		String str = scan.next();
+		
+		// 식의 값을 최소로 만들어라
+		
+//			10-20+40-90+70+80-60
+//			10-(20+40)-(90+70+80)-60
+//	 		즉, 마이너스 연산자 뒤에는 숫자가 클 수록 식의 결과 값이 작아진다.
+//			마이너스 기준으로 자르고, 잘려진 덩어리 내에서는 더하기를 하자
+//			그리고 그것을 계산하자
+//			주의! 첫번째 숫자는 무조건 양수다!
+		
+		String[] arr = str.split("-");
+		
+		int sum = 0;
+		
+		for (int i=0; i<arr.length; i++) {
+			String[] vArr = arr[i].split("\\+");
+			
+			int val = 0;
+			for (int j=0; j<vArr.length; j++) {
+				val += Integer.parseInt(vArr[j]);
+			}
+			
+			if (i==0) { // 첫번째는 양수다
+				sum = val;
+			} else {
+				sum -= val; // 마이너스 연산자를 기준으로 잘랐으므로 빼기
+			}
+		}
+		
+		System.out.println(sum);
+	}
+	
 //	// 11399 ATM
 //	public static void main(String[] args) {
 //		Scanner scan = new Scanner(System.in);
