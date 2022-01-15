@@ -5,34 +5,64 @@ import java.util.Comparator;
 import java.util.Scanner;
 public class baekjoon_001 {
 	
-	// 11047 동전
-	public static void main(String[] args) {
-		Scanner scan = new Scanner(System.in);
-		int n = scan.nextInt();
-		int k = scan.nextInt(); // 목표 금액
-		
-		int[] arr = new int[n];
-		
-		for (int i=0; i<n; i++) {
-			arr[i] = scan.nextInt(); // 동전 단위
-		}
-		
-		// 최소 동전 갯수를 구해라
-		// 큰 금액부터 쪼로록 하면되지
-		
-		int cnt = 0;
-		
-		for (int i=n-1; i>=0; i--) { // 주의! 뒤에부터!
-			int s = k/arr[i]; // 몫
-			
-			if (s > 0) { // 오 나누어졌다면!
-				cnt += s; // 동전 갯수를 올리고
-				k -= arr[i]*s; // 남은 금액을 차감
-			}
-		}
-		
-		System.out.println(cnt);
-	}
+//	// 11399 ATM
+//	public static void main(String[] args) {
+//		Scanner scan = new Scanner(System.in);
+//		int n = scan.nextInt(); // 인원 수 
+//		
+//		int[] arr = new int[n];
+//		
+//		for (int i=0; i<n; i++) {
+//			arr[i] = scan.nextInt(); // 걸리는 시간
+//		}
+//		
+//		// 필요한 시간의 합의 최솟값을 구하라
+//		// 걸리는 시간이 적은 순으로 정렬한다.
+//		// 한명씩 걸리는 시간을 구한다.
+//		// 그 합을 구하고 출력한다.
+//
+//		Arrays.sort(arr);
+//		
+//		int pre = 0;
+//		int sum = 0;
+//		
+//		for (int i=0; i<n; i++) {
+//			// 내 앞 모두 + 나 자신 이게 쌓임
+//			pre += arr[i]; // 내 앞 순서 값들 축적
+//			sum += pre;  // 순서마다 쌓이기
+//		}
+//		
+//		System.out.println(sum);
+//	}
+	
+//	// 11047 동전
+//	public static void main(String[] args) {
+//		Scanner scan = new Scanner(System.in);
+//		int n = scan.nextInt();
+//		int k = scan.nextInt(); // 목표 금액
+//		
+//		int[] arr = new int[n];
+//		
+//		for (int i=0; i<n; i++) {
+//			arr[i] = scan.nextInt(); // 동전 단위
+//		}
+//		
+//		// 최소 동전 갯수를 구해라
+//		// 큰 금액부터 쪼로록 하면되지
+//		
+//		int cnt = 0;
+//		
+//		for (int i=n-1; i>=0; i--) { // 주의! 뒤에부터!
+//			int s = k/arr[i]; // 몫
+//			
+//			if (s > 0) { // 오 나누어졌다면!
+//				cnt += s; // 동전 갯수를 올리고
+//				k -= arr[i]*s; // 남은 금액을 차감
+//			}
+//		}
+//		
+//		System.out.println(cnt);
+//	}
 	
 //	// 1931 회의실 배정 / 1208ms / 정답
 //	public static void main(String[] args) {
