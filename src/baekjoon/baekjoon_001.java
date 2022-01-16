@@ -5,46 +5,144 @@ import java.util.Comparator;
 import java.util.Scanner;
 public class baekjoon_001 {
 	
-	// 2217 로프
+
+	// 1946 신입사원
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
-		int n = scan.nextInt(); // 로프의 갯수
+		int tn = scan.nextInt(); // 테스트 케이스의 갯수
 		
-		int[] arr = new int[n]; // 각 로프가 들 수 있는 중량들
-		
-		for (int i=0; i<n; i++) {
-			arr[i] = scan.nextInt();
-		}
-		
-		// k개의 로프를 사용하여 중량이 w인 물체를 들어올릴 때,
-		// 각각의 로프에는 모두 고르게 w/k 만큼의 중량이 걸리게 된다.
-		
-		// 들어올릴 수 있는 최대 중량을 구해라.
-		// 모든 로프를 사용할 필요는 없다.
-		
-		Arrays.sort(arr); // 1. 중량이 작은 순으로 정렬
-		
-		int max = 0; // 최대로 들 수 있는 중량
-		
-		for (int i=0; i<n; i++) {
-			// 중량이 작은 순으로 정렬되었기 때문에 뒤에
-			// i보다 뒤에 있는 중량은 모두 arr[i] 의 중량만큼은 들어올릴 수 있다.
-			// 그래서 현재 들어올릴 수 있는 중량 = arr[i]에
-			// 뒤에 남은 로프의 갯수를 곱하면, 그게 최대로 들어올릴 수 있는 중량이된다.
-			int now = arr[i]*(n-i);
-			
-			if (max < now) {
-				max = now;
+		for (int i=0; i<tn; i++) {
+			 int n = scan.nextInt(); // 지원자 수
+			 int[] arr = new int[n+1]; // n+1 로 만드는 이유는 (등수는 1부터고, index는 0부터라 하나 크게 만든다)
+			 
+			for (int j=0; j<n; j++) {
+				int x = scan.nextInt(); // 서류심사 등수
+				int y = scan.nextInt(); // 면접심사 등수
+				arr[x] = y; // 이렇게 넣으므로 서류심사 순으로 정렬을 하지 않아도된다. (자동으로 서류심사 순이니까)
 			}
+			
+			int max = 1; // 최대 선발 인원수 (서류심사 1등은 무조건 통과이므로 1부터 시작)
+			int interview_top = arr[1]; // 면접 제일 잘본 등수 (기본값: 서류심사 1등의 면접등수)
+			
+			for (int j=2; j<=n; j++) { // arr[0] 은 어차피 빈 값이고, arr[1] 은 이미 합격이니 2부터 시작
+				if (interview_top > arr[j]) { // 나의 면접등수가 높다면
+					interview_top = arr[j]; // 면접 잘 본 등수를 갈아치우고
+					max++; // 나는 통과
+				}
+			}
+			
+			System.out.println(max);
 		}
-		
-		System.out.println(max);
-		
-		// 7, 10, 12     -> 21 (7,10,12 모두 사용하여 7*3 = 21)
-		// 5, 10, 15, 16 -> 30 (10,15,16 또는 15,16) 
-		// 5, 12, 15, 16 -> 36 (12,15,16 사용하여 12*3 :: 5*4보다 12*3이 더 크다는게 핵심)
-		
 	}
+	
+	
+//	// 1946 신입사원 / 시간초과 (2차원 배열을 사용하여 정렬하면서 오바된듯)
+//	public static void main(String[] args) {
+//		Scanner scan = new Scanner(System.in);
+//		int tn = scan.nextInt(); // 테스트 케이스의 갯수
+//		
+//		// 서류/면접 둘다 떨어진다면 탈락
+//		// 선발할 수 있는 최대 인원수를 각각 출력해라
+//		
+//		int[] res = new int[tn];
+//		
+//		for (int i=0; i<tn; i++) {
+//			int n = scan.nextInt(); // 지원자 수
+//			int[][] arr = new int[n][2];
+//			
+//			for (int j=0; j<n; j++) {
+//				arr[j][0] = scan.nextInt();
+//				arr[j][1] = scan.nextInt();
+//			}
+//			
+//			// 서류심사 성적순으로 정렬
+//			Arrays.sort(arr, new Comparator<int[]>() {
+//				@Override
+//				public int compare(int[] a, int[] b) {
+//					return a[0]-b[0];
+//				}
+//			});
+//			
+//			int max = 0; // 최대 선발 인원수
+//			int interview_top = n; // 면접 제일 잘본 등수
+//			
+//			for (int j=0; j<n; j++) {
+//				
+//				int my_interview = arr[j][1]; // 내 면접 등수
+//				
+//				if(arr[j][0] == 1) { // 서류심사가 1등이라면 무조건 통과
+//					max++;
+//					interview_top = my_interview;
+//					continue;
+//				}
+//				
+//				if (interview_top > arr[j][1]) {
+//					interview_top = arr[j][1]; // 면접 잘 본 등수를 갈아치운다
+//					max++;
+//				}
+//			}
+//			
+//			res[i] = max;
+//		}
+//		
+//		for (int i=0; i<tn; i++) {
+//			System.out.println(res[i]);			
+//		}
+//		
+//		
+//		// 일단 서류심사 성적 순으로 정렬
+//		// 서류든 면접이든 1등이라면 무조건 합격
+//		// 서류순서를 기준으로 나보다 앞에있는 지원자의 면접등수가 나보다 높다면 나는 탈락.
+////		1 4 -- (합격) 무조건 합격 1등이니까
+////		2 5 -- (탈락) 서류1등인 아이가 나보다 면접도 높아
+////		3 6 -- (탈락) 서류1등인 아이가 나보다 면접도 높아
+////		4 2 -- (합격) 합격 나보다 서류 높은애들이 면접은 낮네
+////		5 7 -- (탈락) 서류1등인 아이가 나보다 면접도 높아
+////		6 1 -- (합격) 무조건 합격 1등이니까
+////		7 3 -- (탈락) 서류1등인 아이가 나보다 면접도 높아
+//		
+//	}
+	
+//	// 2217 로프
+//	public static void main(String[] args) {
+//		Scanner scan = new Scanner(System.in);
+//		int n = scan.nextInt(); // 로프의 갯수
+//		
+//		int[] arr = new int[n]; // 각 로프가 들 수 있는 중량들
+//		
+//		for (int i=0; i<n; i++) {
+//			arr[i] = scan.nextInt();
+//		}
+//		
+//		// k개의 로프를 사용하여 중량이 w인 물체를 들어올릴 때,
+//		// 각각의 로프에는 모두 고르게 w/k 만큼의 중량이 걸리게 된다.
+//		
+//		// 들어올릴 수 있는 최대 중량을 구해라.
+//		// 모든 로프를 사용할 필요는 없다.
+//		
+//		Arrays.sort(arr); // 1. 중량이 작은 순으로 정렬
+//		
+//		int max = 0; // 최대로 들 수 있는 중량
+//		
+//		for (int i=0; i<n; i++) {
+//			// 중량이 작은 순으로 정렬되었기 때문에 뒤에
+//			// i보다 뒤에 있는 중량은 모두 arr[i] 의 중량만큼은 들어올릴 수 있다.
+//			// 그래서 현재 들어올릴 수 있는 중량 = arr[i]에
+//			// 뒤에 남은 로프의 갯수를 곱하면, 그게 최대로 들어올릴 수 있는 중량이된다.
+//			int now = arr[i]*(n-i);
+//			
+//			if (max < now) {
+//				max = now;
+//			}
+//		}
+//		
+//		System.out.println(max);
+//		
+//		// 7, 10, 12     -> 21 (7,10,12 모두 사용하여 7*3 = 21)
+//		// 5, 10, 15, 16 -> 30 (10,15,16 또는 15,16) 
+//		// 5, 12, 15, 16 -> 36 (12,15,16 사용하여 12*3 :: 5*4보다 12*3이 더 크다는게 핵심)
+//		
+//	}
 	
 //	// 1541 잃어버린 괄호
 //	public static void main(String[] args) {
