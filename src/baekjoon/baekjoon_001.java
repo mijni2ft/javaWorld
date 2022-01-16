@@ -5,41 +5,82 @@ import java.util.Comparator;
 import java.util.Scanner;
 public class baekjoon_001 {
 	
-	// 1541 잃어버린 괄호
+	// 2217 로프
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
-		String str = scan.next();
+		int n = scan.nextInt(); // 로프의 갯수
 		
-		// 식의 값을 최소로 만들어라
+		int[] arr = new int[n]; // 각 로프가 들 수 있는 중량들
 		
-//			10-20+40-90+70+80-60
-//			10-(20+40)-(90+70+80)-60
-//	 		즉, 마이너스 연산자 뒤에는 숫자가 클 수록 식의 결과 값이 작아진다.
-//			마이너스 기준으로 자르고, 잘려진 덩어리 내에서는 더하기를 하자
-//			그리고 그것을 계산하자
-//			주의! 첫번째 숫자는 무조건 양수다!
+		for (int i=0; i<n; i++) {
+			arr[i] = scan.nextInt();
+		}
 		
-		String[] arr = str.split("-");
+		// k개의 로프를 사용하여 중량이 w인 물체를 들어올릴 때,
+		// 각각의 로프에는 모두 고르게 w/k 만큼의 중량이 걸리게 된다.
 		
-		int sum = 0;
+		// 들어올릴 수 있는 최대 중량을 구해라.
+		// 모든 로프를 사용할 필요는 없다.
 		
-		for (int i=0; i<arr.length; i++) {
-			String[] vArr = arr[i].split("\\+");
+		Arrays.sort(arr); // 1. 중량이 작은 순으로 정렬
+		
+		int max = 0; // 최대로 들 수 있는 중량
+		
+		for (int i=0; i<n; i++) {
+			// 중량이 작은 순으로 정렬되었기 때문에 뒤에
+			// i보다 뒤에 있는 중량은 모두 arr[i] 의 중량만큼은 들어올릴 수 있다.
+			// 그래서 현재 들어올릴 수 있는 중량 = arr[i]에
+			// 뒤에 남은 로프의 갯수를 곱하면, 그게 최대로 들어올릴 수 있는 중량이된다.
+			int now = arr[i]*(n-i);
 			
-			int val = 0;
-			for (int j=0; j<vArr.length; j++) {
-				val += Integer.parseInt(vArr[j]);
-			}
-			
-			if (i==0) { // 첫번째는 양수다
-				sum = val;
-			} else {
-				sum -= val; // 마이너스 연산자를 기준으로 잘랐으므로 빼기
+			if (max < now) {
+				max = now;
 			}
 		}
 		
-		System.out.println(sum);
+		System.out.println(max);
+		
+		// 7, 10, 12     -> 21 (7,10,12 모두 사용하여 7*3 = 21)
+		// 5, 10, 15, 16 -> 30 (10,15,16 또는 15,16) 
+		// 5, 12, 15, 16 -> 36 (12,15,16 사용하여 12*3 :: 5*4보다 12*3이 더 크다는게 핵심)
+		
 	}
+	
+//	// 1541 잃어버린 괄호
+//	public static void main(String[] args) {
+//		Scanner scan = new Scanner(System.in);
+//		String str = scan.next();
+//		
+//		// 식의 값을 최소로 만들어라
+//		
+////			10-20+40-90+70+80-60
+////			10-(20+40)-(90+70+80)-60
+////	 		즉, 마이너스 연산자 뒤에는 숫자가 클 수록 식의 결과 값이 작아진다.
+////			마이너스 기준으로 자르고, 잘려진 덩어리 내에서는 더하기를 하자
+////			그리고 그것을 계산하자
+////			주의! 첫번째 숫자는 무조건 양수다!
+//		
+//		String[] arr = str.split("-");
+//		
+//		int sum = 0;
+//		
+//		for (int i=0; i<arr.length; i++) {
+//			String[] vArr = arr[i].split("\\+");
+//			
+//			int val = 0;
+//			for (int j=0; j<vArr.length; j++) {
+//				val += Integer.parseInt(vArr[j]);
+//			}
+//			
+//			if (i==0) { // 첫번째는 양수다
+//				sum = val;
+//			} else {
+//				sum -= val; // 마이너스 연산자를 기준으로 잘랐으므로 빼기
+//			}
+//		}
+//		
+//		System.out.println(sum);
+//	}
 	
 //	// 11399 ATM
 //	public static void main(String[] args) {
