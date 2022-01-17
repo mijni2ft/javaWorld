@@ -1,39 +1,80 @@
 package baekjoon;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.Scanner;
 public class baekjoon_001 {
 	
-
-	// 1946 신입사원
+	// 1026 보물
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
-		int tn = scan.nextInt(); // 테스트 케이스의 갯수
+		int n = scan.nextInt();
 		
-		for (int i=0; i<tn; i++) {
-			 int n = scan.nextInt(); // 지원자 수
-			 int[] arr = new int[n+1]; // n+1 로 만드는 이유는 (등수는 1부터고, index는 0부터라 하나 크게 만든다)
-			 
-			for (int j=0; j<n; j++) {
-				int x = scan.nextInt(); // 서류심사 등수
-				int y = scan.nextInt(); // 면접심사 등수
-				arr[x] = y; // 이렇게 넣으므로 서류심사 순으로 정렬을 하지 않아도된다. (자동으로 서류심사 순이니까)
-			}
-			
-			int max = 1; // 최대 선발 인원수 (서류심사 1등은 무조건 통과이므로 1부터 시작)
-			int interview_top = arr[1]; // 면접 제일 잘본 등수 (기본값: 서류심사 1등의 면접등수)
-			
-			for (int j=2; j<=n; j++) { // arr[0] 은 어차피 빈 값이고, arr[1] 은 이미 합격이니 2부터 시작
-				if (interview_top > arr[j]) { // 나의 면접등수가 높다면
-					interview_top = arr[j]; // 면접 잘 본 등수를 갈아치우고
-					max++; // 나는 통과
-				}
-			}
-			
-			System.out.println(max);
+		int[] a = new int[n];
+		int[] b = new int[n];
+		
+		for (int i=0; i<n; i++) {
+			a[i] = scan.nextInt();
 		}
+		
+		for (int i=0; i<n; i++) {
+			b[i] = scan.nextInt();
+		}
+		
+		/*
+		 * A는 오름차순으로 정렬
+		 * B는 내림차순으로 정렬
+		 * B는 재정렬이 불가능하다 했으므로, sort로 정렬
+		 * */
+
+		Integer[] sort_b = new Integer[n];
+		
+		for(int i=0; i<n; i++) {
+			sort_b[i] = b[i];
+		}
+		
+		Arrays.sort(a);
+		Arrays.sort(sort_b, Collections.reverseOrder()); // 내림차순정렬
+		
+		int sum = 0;
+		for(int i=0; i<n; i++) {
+			sum += a[i]*sort_b[i];
+		}
+		
+		System.out.println(sum);
+		
 	}
+	
+
+//	// 1946 신입사원
+//	public static void main(String[] args) {
+//		Scanner scan = new Scanner(System.in);
+//		int tn = scan.nextInt(); // 테스트 케이스의 갯수
+//		
+//		for (int i=0; i<tn; i++) {
+//			 int n = scan.nextInt(); // 지원자 수
+//			 int[] arr = new int[n+1]; // n+1 로 만드는 이유는 (등수는 1부터고, index는 0부터라 하나 크게 만든다)
+//			 
+//			for (int j=0; j<n; j++) {
+//				int x = scan.nextInt(); // 서류심사 등수
+//				int y = scan.nextInt(); // 면접심사 등수
+//				arr[x] = y; // 이렇게 넣으므로 서류심사 순으로 정렬을 하지 않아도된다. (자동으로 서류심사 순이니까)
+//			}
+//			
+//			int max = 1; // 최대 선발 인원수 (서류심사 1등은 무조건 통과이므로 1부터 시작)
+//			int interview_top = arr[1]; // 면접 제일 잘본 등수 (기본값: 서류심사 1등의 면접등수)
+//			
+//			for (int j=2; j<=n; j++) { // arr[0] 은 어차피 빈 값이고, arr[1] 은 이미 합격이니 2부터 시작
+//				if (interview_top > arr[j]) { // 나의 면접등수가 높다면
+//					interview_top = arr[j]; // 면접 잘 본 등수를 갈아치우고
+//					max++; // 나는 통과
+//				}
+//			}
+//			
+//			System.out.println(max);
+//		}
+//	}
 	
 	
 //	// 1946 신입사원 / 시간초과 (2차원 배열을 사용하여 정렬하면서 오바된듯)
