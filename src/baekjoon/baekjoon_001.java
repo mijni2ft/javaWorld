@@ -6,45 +6,75 @@ import java.util.Comparator;
 import java.util.Scanner;
 public class baekjoon_001 {
 	
-	// 1026 보물
+	// 1202 보석 도둑
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
-		int n = scan.nextInt();
+		int n = scan.nextInt(); // 보석의 갯수
+		int k = scan.nextInt(); // 가지고 있는 가방
 		
-		int[] a = new int[n];
-		int[] b = new int[n];
+		// 가방 하나에 보석 하나만 가능
+		int[] marr = new int[n]; // 무게 arr
+		int[] varr = new int[n]; // 가격 arr
 		
 		for (int i=0; i<n; i++) {
-			a[i] = scan.nextInt();
+			marr[i] = scan.nextInt();
+			varr[i] = scan.nextInt();
 		}
 		
-		for (int i=0; i<n; i++) {
-			b[i] = scan.nextInt();
+		int[] karr = new int[k]; // 가방 무게 
+		for (int i=0; i<k; i++) {
+			karr[i] = scan.nextInt();
 		}
 		
 		/*
-		 * A는 오름차순으로 정렬
-		 * B는 내림차순으로 정렬
-		 * B는 재정렬이 불가능하다 했으므로, sort로 정렬
+		 * 비싼 것을 우선순위로 정렬
+		 * 가방
+		 * 1. 가방 무게가 큰 순으로 정렬한다
+		 * 2. 가장
+		 * 
 		 * */
-
-		Integer[] sort_b = new Integer[n];
-		
-		for(int i=0; i<n; i++) {
-			sort_b[i] = b[i];
-		}
-		
-		Arrays.sort(a);
-		Arrays.sort(sort_b, Collections.reverseOrder()); // 내림차순정렬
-		
-		int sum = 0;
-		for(int i=0; i<n; i++) {
-			sum += a[i]*sort_b[i];
-		}
-		
-		System.out.println(sum);
 		
 	}
+	
+//	// 1026 보물
+//	public static void main(String[] args) {
+//		Scanner scan = new Scanner(System.in);
+//		int n = scan.nextInt();
+//		
+//		int[] a = new int[n];
+//		int[] b = new int[n];
+//		
+//		for (int i=0; i<n; i++) {
+//			a[i] = scan.nextInt();
+//		}
+//		
+//		for (int i=0; i<n; i++) {
+//			b[i] = scan.nextInt();
+//		}
+//		
+//		/*
+//		 * A는 오름차순으로 정렬
+//		 * B는 내림차순으로 정렬
+//		 * B는 재정렬이 불가능하다 했으므로, sort로 정렬
+//		 * */
+//
+//		Integer[] sort_b = new Integer[n];
+//		
+//		for(int i=0; i<n; i++) {
+//			sort_b[i] = b[i];
+//		}
+//		
+//		Arrays.sort(a);
+//		Arrays.sort(sort_b, Collections.reverseOrder()); // 내림차순정렬
+//		
+//		int sum = 0;
+//		for(int i=0; i<n; i++) {
+//			sum += a[i]*sort_b[i];
+//		}
+//		
+//		System.out.println(sum);
+//		
+//	}
 	
 
 //	// 1946 신입사원
