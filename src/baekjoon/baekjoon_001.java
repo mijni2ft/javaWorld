@@ -6,35 +6,66 @@ import java.util.Comparator;
 import java.util.Scanner;
 public class baekjoon_001 {
 	
-	// 1202 보석 도둑
+	// 5585 거스름돈
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
-		int n = scan.nextInt(); // 보석의 갯수
-		int k = scan.nextInt(); // 가지고 있는 가방
+		int price = scan.nextInt(); // 지불할 돈
 		
-		// 가방 하나에 보석 하나만 가능
-		int[] marr = new int[n]; // 무게 arr
-		int[] varr = new int[n]; // 가격 arr
+		// 500, 100, 50, 10, 5, 1
+		int back = 1000 - price; // 거스름돈 
 		
-		for (int i=0; i<n; i++) {
-			marr[i] = scan.nextInt();
-			varr[i] = scan.nextInt();
+		int[] moneyList = {500, 100, 50, 10, 5, 1};
+		
+		int cnt = 0;
+		
+		for (int m : moneyList) {
+			
+			int _몫 = back/m;
+			
+			if (_몫 > 0) {
+				cnt += _몫;
+				back = back - (m * _몫);
+			}
+			
+			if (back <= 0) {
+				break;
+			}
+			
 		}
 		
-		int[] karr = new int[k]; // 가방 무게 
-		for (int i=0; i<k; i++) {
-			karr[i] = scan.nextInt();
-		}
-		
-		/*
-		 * 비싼 것을 우선순위로 정렬
-		 * 가방
-		 * 1. 가방 무게가 큰 순으로 정렬한다
-		 * 2. 가장
-		 * 
-		 * */
+		System.out.println(cnt);
 		
 	}
+	
+//	// 1202 보석 도둑
+//	public static void main(String[] args) {
+//		Scanner scan = new Scanner(System.in);
+//		int n = scan.nextInt(); // 보석의 갯수
+//		int k = scan.nextInt(); // 가지고 있는 가방
+//		
+//		// 가방 하나에 보석 하나만 가능
+//		int[] marr = new int[n]; // 무게 arr
+//		int[] varr = new int[n]; // 가격 arr
+//		
+//		for (int i=0; i<n; i++) {
+//			marr[i] = scan.nextInt();
+//			varr[i] = scan.nextInt();
+//		}
+//		
+//		int[] karr = new int[k]; // 가방 무게 
+//		for (int i=0; i<k; i++) {
+//			karr[i] = scan.nextInt();
+//		}
+//		
+//		/*
+//		 * 비싼 것을 우선순위로 정렬
+//		 * 가방
+//		 * 1. 가방 무게가 큰 순으로 정렬한다
+//		 * 2. 가장
+//		 * 
+//		 * */
+//		
+//	}
 	
 //	// 1026 보물
 //	public static void main(String[] args) {
